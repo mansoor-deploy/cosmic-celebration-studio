@@ -7,6 +7,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 const HeroSection: React.FC = () => {
   const isMobile = useIsMobile();
+  const birthdayPerson = "Alex"; // You can change this name as needed
   
   const scrollToRSVP = () => {
     const element = document.getElementById('rsvp');
@@ -40,17 +41,20 @@ const HeroSection: React.FC = () => {
       )}
       
       <div className="container mx-auto text-center relative z-10">
-        <div className="animate-float mb-4 inline-block">
-          <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-cosmic-light animate-glow mx-auto mb-4" />
+        <div className="animate-float mb-2 inline-block">
+          <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-cosmic-light animate-glow mx-auto mb-2" />
         </div>
         
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white text-shadow">
-          <span className="block text-cosmic-light">Celestial</span>
-          <span className="block mt-2">Celebration</span>
+        <h2 className="text-xl md:text-2xl text-cosmic-accent mb-2 animate-fade-in">A Special Celebration for</h2>
+        
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-white text-shadow animate-enter">
+          <span className="block">{birthdayPerson}</span>
         </h1>
         
+        <div className="w-20 h-1 bg-cosmic-light mx-auto mb-6 animate-scale-in"></div>
+        
         <p className="text-xl md:text-2xl text-cosmic-accent max-w-xl mx-auto mb-10 leading-relaxed">
-          Join us for a mystical night under the stars to celebrate a special birthday
+          Join us for a mystical night under the stars to celebrate {birthdayPerson}'s birthday
         </p>
         
         <CountdownTimer targetDate="2023-12-31T20:00:00" />

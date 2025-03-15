@@ -1,8 +1,15 @@
 
 import React, { useState } from 'react';
-import { Sparkles, X } from 'lucide-react';
+import { Sparkles, X, Heart, Cake } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel';
 
 // For a real app, you would upload actual images
 // Using placeholder cosmic images for now
@@ -45,8 +52,22 @@ const galleryImages = [
   }
 ];
 
+// This would be a featured image of the birthday person
+const birthdayPerson = {
+  name: "Alex",
+  image: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  fullImage: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  age: 30, // Change as needed
+  birthdayWishes: [
+    "May your day be as bright as the stars!",
+    "Wishing you a cosmic year ahead!",
+    "Here's to another trip around the sun!"
+  ]
+};
+
 const PhotoGallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null);
+  const [showBirthdayHighlight, setShowBirthdayHighlight] = useState(false);
   
   return (
     <section 
@@ -58,9 +79,58 @@ const PhotoGallery: React.FC = () => {
           <Sparkles className="w-8 h-8 text-cosmic-light mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Gallery</h2>
           <p className="text-cosmic-accent max-w-2xl mx-auto">
-            Glimpses of cosmic wonders and celestial moments to inspire your journey to our celebration
+            Glimpses of cosmic wonders and moments from {birthdayPerson.name}'s journey around the sun
           </p>
           <div className="w-20 h-1 bg-cosmic-light mx-auto mt-4"></div>
+        </div>
+        
+        {/* Birthday Person Highlight */}
+        <div className="cosmic-card p-6 mb-12 relative overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-cosmic-light opacity-10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-cosmic opacity-10 rounded-full blur-3xl"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            <div className="md:col-span-1">
+              <div 
+                className="relative overflow-hidden rounded-full aspect-square border-4 border-cosmic-light cursor-pointer hover-scale"
+                onClick={() => setShowBirthdayHighlight(true)}
+              >
+                <img 
+                  src={birthdayPerson.image} 
+                  alt={birthdayPerson.name} 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/70 to-transparent flex items-end justify-center pb-4">
+                  <Cake className="w-8 h-8 text-cosmic-light animate-bounce" />
+                </div>
+              </div>
+            </div>
+            
+            <div className="md:col-span-2 text-center md:text-left space-y-4">
+              <h3 className="text-3xl font-bold text-cosmic-light">
+                Celebrating {birthdayPerson.name}
+              </h3>
+              <p className="text-lg text-cosmic-accent">
+                {birthdayPerson.age} Trips Around The Sun
+              </p>
+              
+              <div className="space-y-2">
+                <Carousel>
+                  <CarouselContent>
+                    {birthdayPerson.birthdayWishes.map((wish, index) => (
+                      <CarouselItem key={index}>
+                        <div className="p-4 text-center">
+                          <p className="text-cosmic-accent italic">"{wish}"</p>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-0 text-cosmic-light border-cosmic" />
+                  <CarouselNext className="right-0 text-cosmic-light border-cosmic" />
+                </Carousel>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -100,6 +170,31 @@ const PhotoGallery: React.FC = () => {
               </p>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+      
+      <Dialog open={showBirthdayHighlight} onOpenChange={() => setShowBirthdayHighlight(false)}>
+        <DialogContent className="bg-cosmic-dark border-cosmic-light max-w-4xl">
+          <div className="space-y-6">
+            <div className="relative overflow-hidden rounded-lg">
+              <img 
+                src={birthdayPerson.fullImage} 
+                alt={birthdayPerson.name} 
+                className="w-full h-auto rounded-lg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/70 to-transparent flex items-end justify-center">
+                <div className="p-6 text-center w-full">
+                  <h3 className="text-3xl font-bold text-white mb-2">Happy Birthday, {birthdayPerson.name}!</h3>
+                  <p className="text-cosmic-accent text-lg">We're celebrating you among the stars tonight</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center space-x-4">
+              <Heart className="text-red-500 animate-pulse w-8 h-8" />
+              <Cake className="text-cosmic-light w-8 h-8" />
+              <Heart className="text-red-500 animate-pulse w-8 h-8" />
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </section>

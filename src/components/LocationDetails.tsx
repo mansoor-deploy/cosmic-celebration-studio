@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { MapPin, Navigation, Phone, ExternalLink } from 'lucide-react';
+import { MapPin, Navigation, Phone, ExternalLink, Cake } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const LocationDetails: React.FC = () => {
   const isMobile = useIsMobile();
+  const birthdayPerson = "Alex"; // Ensure this matches the name in other components
   
   const handleDirections = () => {
     window.open('https://maps.google.com/?q=Starlight+Banquet+Hall+1234+Celestial+Avenue+Astral+City', '_blank');
@@ -23,8 +24,14 @@ const LocationDetails: React.FC = () => {
       
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <MapPin className="w-8 h-8 text-cosmic-light mx-auto mb-4" />
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Location</h2>
+          <div className="flex items-center justify-center space-x-2 mb-4">
+            <MapPin className="w-8 h-8 text-cosmic-light" />
+            <Cake className="w-6 h-6 text-cosmic-light animate-pulse" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Celebration Venue</h2>
+          <p className="text-cosmic-accent max-w-2xl mx-auto mb-4">
+            Join us as we celebrate {birthdayPerson}'s special day at this magical location
+          </p>
           <div className="w-20 h-1 bg-cosmic-light mx-auto"></div>
         </div>
         
@@ -59,7 +66,8 @@ const LocationDetails: React.FC = () => {
           
           {/* Location Info */}
           <div className="order-1 lg:order-2 cosmic-card h-full flex flex-col justify-center">
-            <h3 className="text-2xl font-bold mb-6 text-white text-center lg:text-left">Starlight Banquet Hall</h3>
+            <h3 className="text-2xl font-bold mb-2 text-white text-center lg:text-left">Starlight Banquet Hall</h3>
+            <p className="text-cosmic-accent mb-6 text-center lg:text-left">Where we'll celebrate {birthdayPerson}'s special day</p>
             
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
