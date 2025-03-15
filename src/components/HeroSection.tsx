@@ -3,8 +3,11 @@ import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import CountdownTimer from './CountdownTimer';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const HeroSection: React.FC = () => {
+  const isMobile = useIsMobile();
+  
   const scrollToRSVP = () => {
     const element = document.getElementById('rsvp');
     if (element) {
@@ -18,12 +21,23 @@ const HeroSection: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden pt-20"
+      className="min-h-[100svh] flex items-center justify-center px-4 relative overflow-hidden pt-20"
     >
       <div className="absolute inset-0 bg-cosmic-dark opacity-70 z-[-1]"></div>
       
       {/* Animated Nebula Effect */}
       <div className="absolute inset-0 z-[-1] opacity-30 nebula-bg"></div>
+      
+      {/* Mobile-friendly Floating Stars */}
+      {isMobile && (
+        <div className="absolute inset-0 z-[-1]">
+          <div className="star-sm absolute top-[10%] left-[20%] animate-twinkle-slow"></div>
+          <div className="star-md absolute top-[30%] left-[60%] animate-twinkle"></div>
+          <div className="star-lg absolute top-[45%] left-[15%] animate-twinkle-fast"></div>
+          <div className="star-sm absolute top-[70%] left-[80%] animate-twinkle"></div>
+          <div className="star-md absolute top-[85%] left-[25%] animate-twinkle-slow"></div>
+        </div>
+      )}
       
       <div className="container mx-auto text-center relative z-10">
         <div className="animate-float mb-4 inline-block">
@@ -35,7 +49,7 @@ const HeroSection: React.FC = () => {
           <span className="block mt-2">Celebration</span>
         </h1>
         
-        <p className="text-xl md:text-2xl text-cosmic-accent max-w-xl mx-auto mb-10">
+        <p className="text-xl md:text-2xl text-cosmic-accent max-w-xl mx-auto mb-10 leading-relaxed">
           Join us for a mystical night under the stars to celebrate a special birthday
         </p>
         
@@ -44,9 +58,9 @@ const HeroSection: React.FC = () => {
         <div className="mt-10">
           <Button 
             onClick={scrollToRSVP} 
-            className="cosmic-button text-lg transform transition-transform duration-300 hover:scale-105"
+            className="cosmic-button text-lg transform transition-transform duration-300 hover:scale-105 px-8 py-6"
           >
-            <span className="relative z-10">RSVP Now</span>
+            <span className="relative z-10 text-xl">RSVP Now</span>
           </Button>
         </div>
       </div>

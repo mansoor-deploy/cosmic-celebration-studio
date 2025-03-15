@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import StarryBackground from '@/components/StarryBackground';
 import HeroSection from '@/components/HeroSection';
 import EventDetails from '@/components/EventDetails';
+import LocationDetails from '@/components/LocationDetails';
 import PhotoGallery from '@/components/PhotoGallery';
 import GiftRegistry from '@/components/GiftRegistry';
 import RSVPForm from '@/components/RSVPForm';
@@ -26,6 +27,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <EventDetails />
+      <LocationDetails />
       <PhotoGallery />
       <GiftRegistry />
       <RSVPForm />

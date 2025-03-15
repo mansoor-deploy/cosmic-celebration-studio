@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +40,11 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <h1 className="text-xl md:text-2xl font-bold text-cosmic-light">
+            <h1 className={cn(
+              "font-bold transition-all duration-300",
+              isScrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl",
+              "text-cosmic-light"
+            )}>
               <span className="text-cosmic-accent">Celestial</span> Celebration
             </h1>
           </div>
@@ -56,6 +62,12 @@ const Navbar: React.FC = () => {
               className="text-cosmic-accent hover:text-cosmic-light transition-colors"
             >
               Event Details
+            </button>
+            <button 
+              onClick={() => scrollToSection('location')} 
+              className="text-cosmic-accent hover:text-cosmic-light transition-colors"
+            >
+              Location
             </button>
             <button 
               onClick={() => scrollToSection('gallery')} 
@@ -81,7 +93,7 @@ const Navbar: React.FC = () => {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="md:hidden text-cosmic-accent"
+            className="md:hidden text-cosmic-accent z-50"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -89,43 +101,60 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-cosmic-dark/95 backdrop-blur-md">
-          <div className="py-4 px-6 space-y-4">
-            <button 
-              onClick={() => scrollToSection('home')} 
-              className="block w-full text-left py-2 text-cosmic-accent hover:text-cosmic-light transition-colors"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('event')} 
-              className="block w-full text-left py-2 text-cosmic-accent hover:text-cosmic-light transition-colors"
-            >
-              Event Details
-            </button>
-            <button 
-              onClick={() => scrollToSection('gallery')} 
-              className="block w-full text-left py-2 text-cosmic-accent hover:text-cosmic-light transition-colors"
-            >
-              Gallery
-            </button>
-            <button 
-              onClick={() => scrollToSection('gifts')} 
-              className="block w-full text-left py-2 text-cosmic-accent hover:text-cosmic-light transition-colors"
-            >
-              Gifts
-            </button>
+      {/* Mobile Menu - Updated for better animation and styling */}
+      <div className={cn(
+        "fixed inset-0 bg-cosmic-dark/95 backdrop-blur-lg md:hidden transition-all duration-300 z-40 flex flex-col justify-center",
+        mobileMenuOpen 
+          ? "opacity-100 pointer-events-auto translate-y-0" 
+          : "opacity-0 pointer-events-none translate-y-[-100vh]"
+      )}>
+        <div className="py-4 px-6 space-y-6 text-center">
+          <button 
+            onClick={() => scrollToSection('home')} 
+            className="block w-full text-center py-3 text-2xl text-cosmic-accent hover:text-cosmic-light transition-colors"
+          >
+            Home
+          </button>
+          <button 
+            onClick={() => scrollToSection('event')} 
+            className="block w-full text-center py-3 text-2xl text-cosmic-accent hover:text-cosmic-light transition-colors"
+          >
+            Event Details
+          </button>
+          <button 
+            onClick={() => scrollToSection('location')} 
+            className="block w-full text-center py-3 text-2xl text-cosmic-accent hover:text-cosmic-light transition-colors"
+          >
+            Location
+          </button>
+          <button 
+            onClick={() => scrollToSection('gallery')} 
+            className="block w-full text-center py-3 text-2xl text-cosmic-accent hover:text-cosmic-light transition-colors"
+          >
+            Gallery
+          </button>
+          <button 
+            onClick={() => scrollToSection('gifts')} 
+            className="block w-full text-center py-3 text-2xl text-cosmic-accent hover:text-cosmic-light transition-colors"
+          >
+            Gifts
+          </button>
+          <div className="mt-8">
             <Button 
               onClick={() => scrollToSection('rsvp')} 
-              className="w-full bg-cosmic hover:bg-cosmic-light text-white"
+              className="w-3/4 py-6 bg-cosmic hover:bg-cosmic-light text-white text-xl"
             >
               RSVP Now
             </Button>
           </div>
         </div>
-      )}
+        
+        <div className="absolute bottom-10 w-full text-center">
+          <p className="text-cosmic-light/70 text-sm">
+            Join us for a mystical celebration
+          </p>
+        </div>
+      </div>
     </header>
   );
 };
