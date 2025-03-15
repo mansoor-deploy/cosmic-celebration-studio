@@ -1,12 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import StarryBackground from '@/components/StarryBackground';
+import HeroSection from '@/components/HeroSection';
+import EventDetails from '@/components/EventDetails';
+import PhotoGallery from '@/components/PhotoGallery';
+import GiftRegistry from '@/components/GiftRegistry';
+import RSVPForm from '@/components/RSVPForm';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    // Smooth scroll behavior for the entire page
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Clean up
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-cosmic-dark">
+      <StarryBackground />
+      <Navbar />
+      <HeroSection />
+      <EventDetails />
+      <PhotoGallery />
+      <GiftRegistry />
+      <RSVPForm />
+      <Footer />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				cosmic: {
+					DEFAULT: '#6E59A5',
+					dark: '#1A1F2C',
+					light: '#9b87f5',
+					accent: '#E5DEFF',
+					silver: '#9F9EA1',
+					charcoal: '#403E43'
 				}
 			},
 			borderRadius: {
@@ -84,11 +93,38 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'twinkle': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.3' },
+				},
+				'shooting-star': {
+					'0%': { transform: 'translateX(-100%) translateY(-100%)', opacity: '0' },
+					'10%': { opacity: '1' },
+					'100%': { transform: 'translateX(100vw) translateY(100vh)', opacity: '0' },
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
+				'glow': {
+					'0%, 100%': { filter: 'drop-shadow(0 0 5px rgba(229, 222, 255, 0.5))' },
+					'50%': { filter: 'drop-shadow(0 0 20px rgba(229, 222, 255, 0.8))' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'twinkle': 'twinkle 4s ease-in-out infinite',
+				'twinkle-slow': 'twinkle 6s ease-in-out infinite',
+				'twinkle-fast': 'twinkle 2s ease-in-out infinite',
+				'shooting-star': 'shooting-star 6s linear infinite',
+				'float': 'float 6s ease-in-out infinite',
+				'glow': 'glow 3s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'cosmic-gradient': 'linear-gradient(90deg, rgba(26, 31, 44, 1) 0%, rgba(110, 89, 165, 0.8) 100%)',
+				'nebula-gradient': 'linear-gradient(to right, #1A1F2C 0%, #6E59A5 50%, #9b87f5 100%)'
 			}
 		}
 	},
